@@ -1,0 +1,15 @@
+{% extends "menu/base.html" %}
+{% load static %}
+{% block title %}
+{% if category %}{{ category.title }}{% else %}Food{% endif %}
+{% endblock %}
+{% block content %}
+<div class="product-detail">
+<img src="{% if food.image %}{{ food.image.url }}
+{% else %}{% static "img/no-image.png" %}{% endif %}">
+<h1>{{ food.name }}</h1>
+<h2><a href="{{ food.category.get_absolute_url }}">{{ food.category }}</a></h2>
+<p class="price">${{ food.price }}</p>
+{{ food.available|linebreaks }}
+</div>
+{% endblock %}

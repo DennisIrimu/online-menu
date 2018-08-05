@@ -20,7 +20,7 @@ class Food(models.Model):
     category = models.ForeignKey(Category,related_name='foods')
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True,blank=True)
-    image = models.ImageField(upload_to='foods/%Y/%m/%d',blank=True)
+    image = models.ImageField(upload_to='',blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
 

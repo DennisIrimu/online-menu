@@ -8,8 +8,8 @@ def food_list(request, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         foods = foods.filter(category=category)
-    return render(request,'shop/food/list.html',{'category':category,'categories':categories,'foods':foods})
+    return render(request,'menu/food/list.html',{'category':category,'categories':categories,'foods':foods})
 
 def food_detail(request, id, slug):
-    food = get_object_or_404(Product,id=id,slug=slug,available=True)
-    return render(request,'shop/food/detail.html',{'food':food})
+    food = get_object_or_404(Food,id=id,slug=slug,available=True)
+    return render(request,'menu/food/detail.html',{'food':food})

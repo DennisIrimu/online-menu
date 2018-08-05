@@ -1,0 +1,36 @@
+{% extends "menu/base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if category %}{{ category.name }}{% else %}Food{% endif %}
+{% endblock %}
+
+{% block content %}
+  <div id="sidebar">
+    <h3>Categories</h3>
+    <ul>
+      <li {% if not category %}class="selected"{% endif %}>
+      <a href="{% url "shop:food_list" %}">All</a>
+      </li>
+      {% for c in categories %}
+          <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+          </li>
+      {% endfor %}
+      </ul>
+      </div>
+      <div id="main" class="product-list">
+      <h1>{% if category %}{{ category.name }}{% else %}Food{% endif %}</h1>
+      {% for food in foods %}
+      <div class="item">
+      <a href="{{ product.get_absolute_url }}">
+      <img src="{% if food.image %}{{ food.image.url }}
+      {%else %}{% static "img/no-image.png" %}{% endif %}">
+      </a>
+      <a href="{{ food.get_absolute_url }}">{{ food.name }}</
+      a><br>
+      ${{ food.price }}
+      </div>
+      {% endfor %}
+      </div>
+{% endblock %}
