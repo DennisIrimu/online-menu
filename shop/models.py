@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.urlresolvers import reverse
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=200,db_index=True)
@@ -12,6 +12,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('shop:food_list_by_category',args=[self.slug])
 
 class Food(models.Model):
     category = models.ForeignKey(Category,related_name='foods')
@@ -27,3 +30,6 @@ class Food(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('shop:food_detail',args=[self.id, self.slug])
